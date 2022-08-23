@@ -1,0 +1,53 @@
+﻿@model IEnumerable<mvc_project.Models.Departments_>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12 m-2">
+        <div class="card border-info">
+            <div class="card-header">
+                <h2 class="card-title">Department List</h2>
+                <h6 class="card-subtitle d-flex justify-content-between text-muted">Department Infos <a href="@Url.Action("Create","Department")" class="btn btn-primary" title="Create new employee"><i class="fa fa-plus">Add New</i></a></h6>
+            </div>
+            <div class="card-body">
+
+                   @Html.Raw(TempData["delmsg"]);
+                
+
+                <table class="table table-bordered table-striped">
+                    <thead class="bg-primary">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DeptName)
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DeptName)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit","Department", new { id = item.DepartmentId })" class="btn btn-success"><span class="fa fa-edit">Edit</span></a>
+                                <a href="@Url.Action("Delete","Department", new { id = item.DepartmentId })" class="btn btn-danger"><span class="fa fa-trash">Delete</span></a>
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+            <div class="card-footer">
+                @Model.Count() Departments
+            </div>
+        </div>
+    </div>
+</div>
+

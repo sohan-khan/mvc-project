@@ -1,0 +1,96 @@
+﻿@model IEnumerable<mvc_project.Models.DeptwiseDoctor>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<head>
+   
+</head>
+<body>
+    <div class="container">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="~/Images/hp3.jpg" width="1000" height="60" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-warning">Welcome to our Hospital</h1>
+                        <p class="text-primary">Our Immergency services</p>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="~/Images/hp5.jpg" width="1000" height="60" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-warning">Welcome to our Hospital</h1>
+                        <p class="text-primary">our Hospital Premises</p>
+                    </div>
+                </div>
+
+                <div class="item">
+
+                    <img src="~/Images/hp1.jpg" width="1000" height="60" />
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="text-warning">Welcome to our Hospital</h1>
+                        <p class="text-primary">our Hospital departmens</p>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <button type="button" class="btn btn-primary btn-sm btn-block mt-lg-5">Our Services</button>
+    <div class=" container mt-lg-5">
+        <div class="card-deck">
+            <div class="card">
+                <img class="card-img-top" src="~/Images/hp8.jpg" width="239" height="200" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Our Deptise Doctors</h5>
+                    <p class="card-text">In our hospitals specials doctor services avaiable</p>
+                    <p class="card-text"><small class="text-muted">surgery department</small></p>
+                    <a href="@Url.Action("Index","Deptvm")" class="btn btn-primary">Go multitable list</a>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="~/Images/hos4.jpg" width="239" height="200" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Our Doctors</h5>
+                    <p class="card-text">See our Specialse Doctors list</p>
+                    <p class="card-text"><small class="text-muted">Go Doctors section</small></p>
+                    <a href="@Url.Action("Index","DeptwiseDoctor")" class="btn btn-primary">Go Doctors list</a>
+                </div>
+            </div>
+            <div class="card">
+                <img class="card-img-top" src="~/Images/rsz_hp-6.jpg" width="239" height="200" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">Our departments</h5>
+                    <p class="card-text">See Our departments</p>
+                    <p class="card-text"><small class="text-muted"> Go Department section</small></p>
+                    <a href="@Url.Action("Index","Department")" class="btn btn-primary">Go Departments list</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<br/>
+<br />
+<br />
+<br />
+<br />
+<footer class="my-lg-5 text-center text-dark bg-success">
+    &copy; @DateTime.Now.Year-All Rights reserved by Sohan mollah
+</footer>

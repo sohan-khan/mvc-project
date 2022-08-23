@@ -1,0 +1,60 @@
+﻿@model IEnumerable<mvc_project.Models.Doctors_>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12 m-2">
+        <div class="card border-info">
+            <div class="card-header">
+                <h2 class="card-title">Doctors List</h2>
+                <h6 class="card-subtitle d-flex justify-content-between text-muted">Doctors Info <a href="@Url.Action("Create","Doctors")" class="btn btn-primary" title="Create new Doctor"><i class="fa fa-plus">Add New</i></a></h6>
+            </div>
+            <div class="card-body">
+
+                @Html.Raw(TempData["delmsg"])
+
+                <table class="table table-bordered table-striped">
+                    <thead class="bg-warning">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            
+                            <th>
+                                @Html.DisplayNameFor(model => model.Patinet.Name)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Patinet.Name)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit","Doctors",new { id = item.DoctorId })" class="btn btn-info"><i class="fa fa-edit">Edit</i></a>
+                                <a href="@Url.Action("Delete","Doctors",new { id = item.DoctorId })" class="btn btn-danger"><i class="fa fa-trash">Delete</i></a>
+
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+            <div class="card-footer">
+                @Model.Count() Doctors
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,72 @@
+﻿@model mvc_project.Models.DeptwiseDoctor
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete DoctorId @Model.DeptwiseId</h2>
+
+<h3 class="alert alert-danger">Are you sure you want to delete this?</h3>
+<div>
+    
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Designation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Designation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Institution)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Institution)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VisitFee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VisitFee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.Picture)*@
+            <img src="@Url.Content(Model.Picture)" width="50" height="50" />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departments_.DeptName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departments_.DeptName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctors_.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Doctors_.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

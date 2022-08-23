@@ -1,0 +1,40 @@
+﻿@model  mvc_project.Models.UserInfo
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="row m-2">
+    <div class="col-10">
+
+        @if (TempData["msg"] != null)
+        {
+
+            <h4>@TempData["msg"].ToString()</h4>
+        }
+        @using (Html.BeginForm("login", "Home", FormMethod.Post))
+        {
+            <div class="row mb-1">
+                @Html.LabelFor(x => x.Name, new { @class = "col-form-label col-2 " })
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control col-4" })
+                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger col-4" })
+            </div>
+
+
+            <div class="row mb-1">
+                @Html.LabelFor(x => x.Password, new { @class = "col-form-label col-2" })
+                @Html.PasswordFor(x => x.Password, new { @class = "form-control col-4" })
+                @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger col-4" })
+            </div>
+
+            <div class="row mt-1">
+                <div class="col-4 offset-2">
+                    <button class="btn btn-primary fa fa-save" type="submit">save</button>
+                </div>
+            </div>
+        }
+        <div>
+            <a href="@Url.Action("Register","Home")" class="btn btn-link">Click to SignUp</a>
+        </div>
+    </div>
+
+</div>

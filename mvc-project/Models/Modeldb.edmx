@@ -1,0 +1,622 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="hosmsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminPanel">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments ">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeptName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DeptwiseDoctors">
+          <Key>
+            <PropertyRef Name="DeptwiseId" />
+          </Key>
+          <Property Name="DeptwiseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Institution" Type="nvarchar" MaxLength="100" />
+          <Property Name="VisitFee" Type="money" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Doctors ">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PatientId" Type="int" />
+        </EntityType>
+        <EntityType Name="Doctors Salary">
+          <Key>
+            <PropertyRef Name="DocsId" />
+          </Key>
+          <Property Name="DocsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VisitingDay" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PayRate" Type="money" Nullable="false" />
+          <Property Name="TotalHour" Type="int" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Maintenence Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="int" />
+          <Property Name="Work section" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+          <Property Name="AdminId" Type="int" />
+        </EntityType>
+        <EntityType Name="Nurses">
+          <Key>
+            <PropertyRef Name="NurseId" />
+          </Key>
+          <Property Name="NurseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="int" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Patinets">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="VisitDate" Type="date" Nullable="false" />
+          <Property Name="Fee" Type="money" Nullable="false" />
+          <Property Name="Isadmitted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Confirm pass" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Role" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__DeptwiseD__Depar__4D94879B">
+          <End Role="Departments " Type="Self.Departments " Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeptwiseDoctors" Type="Self.DeptwiseDoctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments ">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DeptwiseDoctors">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DeptwiseD__Docto__4E88ABD4">
+          <End Role="Doctors " Type="Self.Doctors " Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeptwiseDoctors" Type="Self.DeptwiseDoctors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors ">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="DeptwiseDoctors">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors _Doctors ">
+          <End Role="Doctors " Type="Self.Doctors " Multiplicity="1" />
+          <End Role="Doctors 1" Type="Self.Doctors " Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors ">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Doctors 1">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors Salary_Doctors ">
+          <End Role="Doctors " Type="Self.Doctors " Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Doctors Salary" Type="Self.Doctors Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors ">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Doctors Salary">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor's Table_Patinets">
+          <End Role="Patinets" Type="Self.Patinets" Multiplicity="0..1" />
+          <End Role="Doctors " Type="Self.Doctors " Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patinets">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Doctors ">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Maintenence Employee_AdminPanel">
+          <End Role="AdminPanel" Type="Self.AdminPanel" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Maintenence Employee" Type="Self.Maintenence Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminPanel">
+              <PropertyRef Name="AdminId" />
+            </Principal>
+            <Dependent Role="Maintenence Employee">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nurses_Departments ">
+          <End Role="Departments " Type="Self.Departments " Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Nurses" Type="Self.Nurses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments ">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Nurses">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hosmsModelStoreContainer">
+          <EntitySet Name="AdminPanel" EntityType="Self.AdminPanel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments " EntityType="Self.Departments " Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeptwiseDoctors" EntityType="Self.DeptwiseDoctors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors " EntityType="Self.Doctors " Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctors Salary" EntityType="Self.Doctors Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maintenence Employee" EntityType="Self.Maintenence Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Nurses" EntityType="Self.Nurses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Patinets" EntityType="Self.Patinets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__DeptwiseD__Depar__4D94879B" Association="Self.FK__DeptwiseD__Depar__4D94879B">
+            <End Role="Departments " EntitySet="Departments " />
+            <End Role="DeptwiseDoctors" EntitySet="DeptwiseDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DeptwiseD__Docto__4E88ABD4" Association="Self.FK__DeptwiseD__Docto__4E88ABD4">
+            <End Role="Doctors " EntitySet="Doctors " />
+            <End Role="DeptwiseDoctors" EntitySet="DeptwiseDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors _Doctors " Association="Self.FK_Doctors _Doctors ">
+            <End Role="Doctors " EntitySet="Doctors " />
+            <End Role="Doctors 1" EntitySet="Doctors " />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors Salary_Doctors " Association="Self.FK_Doctors Salary_Doctors ">
+            <End Role="Doctors " EntitySet="Doctors " />
+            <End Role="Doctors Salary" EntitySet="Doctors Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor's Table_Patinets" Association="Self.FK_Doctor's Table_Patinets">
+            <End Role="Patinets" EntitySet="Patinets" />
+            <End Role="Doctors " EntitySet="Doctors " />
+          </AssociationSet>
+          <AssociationSet Name="FK_Maintenence Employee_AdminPanel" Association="Self.FK_Maintenence Employee_AdminPanel">
+            <End Role="AdminPanel" EntitySet="AdminPanel" />
+            <End Role="Maintenence Employee" EntitySet="Maintenence Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nurses_Departments " Association="Self.FK_Nurses_Departments ">
+            <End Role="Departments " EntitySet="Departments " />
+            <End Role="Nurses" EntitySet="Nurses" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="hosmsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdminPanel">
+          <Key>
+            <PropertyRef Name="AdminId" />
+          </Key>
+          <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Maintenence_Employee" Relationship="Self.FK_Maintenence_Employee_AdminPanel" FromRole="AdminPanel" ToRole="Maintenence_Employee" />
+        </EntityType>
+        <EntityType Name="Departments_">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeptName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="DeptwiseDoctors" Relationship="Self.FK__DeptwiseD__Depar__4D94879B" FromRole="Departments_" ToRole="DeptwiseDoctors" />
+          <NavigationProperty Name="Nurses" Relationship="Self.FK_Nurses_Departments_" FromRole="Departments_" ToRole="Nurses" />
+        </EntityType>
+        <EntityType Name="DeptwiseDoctor">
+          <Key>
+            <PropertyRef Name="DeptwiseId" />
+          </Key>
+          <Property Name="DeptwiseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Institution" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VisitFee" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Departments_" Relationship="Self.FK__DeptwiseD__Depar__4D94879B" FromRole="DeptwiseDoctors" ToRole="Departments_" />
+          <NavigationProperty Name="Doctors_" Relationship="Self.FK__DeptwiseD__Docto__4E88ABD4" FromRole="DeptwiseDoctors" ToRole="Doctors_" />
+        </EntityType>
+        <EntityType Name="Doctors_">
+          <Key>
+            <PropertyRef Name="DoctorId" />
+          </Key>
+          <Property Name="DoctorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" />
+          <NavigationProperty Name="DeptwiseDoctors" Relationship="Self.FK__DeptwiseD__Docto__4E88ABD4" FromRole="Doctors_" ToRole="DeptwiseDoctors" />
+          <NavigationProperty Name="Doctors_1" Relationship="Self.FK_Doctors__Doctors_" FromRole="Doctors_" ToRole="Doctors_1" />
+          <NavigationProperty Name="Doctors_2" Relationship="Self.FK_Doctors__Doctors_" FromRole="Doctors_1" ToRole="Doctors_" />
+          <NavigationProperty Name="Doctors_Salary" Relationship="Self.FK_Doctors_Salary_Doctors_" FromRole="Doctors_" ToRole="Doctors_Salary" />
+          <NavigationProperty Name="Patinet" Relationship="Self.FK_Doctor_s_Table_Patinets" FromRole="Doctors_" ToRole="Patinets" />
+        </EntityType>
+        <EntityType Name="Doctors_Salary">
+          <Key>
+            <PropertyRef Name="DocsId" />
+          </Key>
+          <Property Name="DocsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VisitingDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PayRate" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="TotalHour" Type="Int32" Nullable="false" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctors_" Relationship="Self.FK_Doctors_Salary_Doctors_" FromRole="Doctors_Salary" ToRole="Doctors_" />
+        </EntityType>
+        <EntityType Name="Maintenence_Employee">
+          <Key>
+            <PropertyRef Name="EmpId" />
+          </Key>
+          <Property Name="EmpId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="Int32" />
+          <Property Name="Work_section" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="AdminId" Type="Int32" />
+          <NavigationProperty Name="AdminPanel" Relationship="Self.FK_Maintenence_Employee_AdminPanel" FromRole="Maintenence_Employee" ToRole="AdminPanel" />
+        </EntityType>
+        <EntityType Name="Nurse">
+          <Key>
+            <PropertyRef Name="NurseId" />
+          </Key>
+          <Property Name="NurseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="Int32" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departments_" Relationship="Self.FK_Nurses_Departments_" FromRole="Nurses" ToRole="Departments_" />
+        </EntityType>
+        <EntityType Name="Patinet">
+          <Key>
+            <PropertyRef Name="PatientId" />
+          </Key>
+          <Property Name="PatientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="VisitDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fee" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Isadmitted" Type="Boolean" />
+          <NavigationProperty Name="Doctors_" Relationship="Self.FK_Doctor_s_Table_Patinets" FromRole="Patinets" ToRole="Doctors_" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Confirm_pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Maintenence_Employee_AdminPanel">
+          <End Role="AdminPanel" Type="Self.AdminPanel" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Maintenence_Employee" Type="Self.Maintenence_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdminPanel">
+              <PropertyRef Name="AdminId" />
+            </Principal>
+            <Dependent Role="Maintenence_Employee">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DeptwiseD__Depar__4D94879B">
+          <End Role="Departments_" Type="Self.Departments_" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeptwiseDoctors" Type="Self.DeptwiseDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments_">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="DeptwiseDoctors">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Nurses_Departments_">
+          <End Role="Departments_" Type="Self.Departments_" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Nurses" Type="Self.Nurse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments_">
+              <PropertyRef Name="DepartmentId" />
+            </Principal>
+            <Dependent Role="Nurses">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DeptwiseD__Docto__4E88ABD4">
+          <End Role="Doctors_" Type="Self.Doctors_" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DeptwiseDoctors" Type="Self.DeptwiseDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors_">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="DeptwiseDoctors">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors__Doctors_">
+          <End Role="Doctors_" Type="Self.Doctors_" Multiplicity="1" />
+          <End Role="Doctors_1" Type="Self.Doctors_" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors_">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Doctors_1">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctors_Salary_Doctors_">
+          <End Role="Doctors_" Type="Self.Doctors_" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Doctors_Salary" Type="Self.Doctors_Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctors_">
+              <PropertyRef Name="DoctorId" />
+            </Principal>
+            <Dependent Role="Doctors_Salary">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Doctor_s_Table_Patinets">
+          <End Role="Patinets" Type="Self.Patinet" Multiplicity="0..1" />
+          <End Role="Doctors_" Type="Self.Doctors_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patinets">
+              <PropertyRef Name="PatientId" />
+            </Principal>
+            <Dependent Role="Doctors_">
+              <PropertyRef Name="PatientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hosmsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminPanels" EntityType="Self.AdminPanel" />
+          <EntitySet Name="Departments_" EntityType="Self.Departments_" />
+          <EntitySet Name="DeptwiseDoctors" EntityType="Self.DeptwiseDoctor" />
+          <EntitySet Name="Doctors_" EntityType="Self.Doctors_" />
+          <EntitySet Name="Doctors_Salaries" EntityType="Self.Doctors_Salary" />
+          <EntitySet Name="Maintenence_Employees" EntityType="Self.Maintenence_Employee" />
+          <EntitySet Name="Nurses" EntityType="Self.Nurse" />
+          <EntitySet Name="Patinets" EntityType="Self.Patinet" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK_Maintenence_Employee_AdminPanel" Association="Self.FK_Maintenence_Employee_AdminPanel">
+            <End Role="AdminPanel" EntitySet="AdminPanels" />
+            <End Role="Maintenence_Employee" EntitySet="Maintenence_Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DeptwiseD__Depar__4D94879B" Association="Self.FK__DeptwiseD__Depar__4D94879B">
+            <End Role="Departments_" EntitySet="Departments_" />
+            <End Role="DeptwiseDoctors" EntitySet="DeptwiseDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Nurses_Departments_" Association="Self.FK_Nurses_Departments_">
+            <End Role="Departments_" EntitySet="Departments_" />
+            <End Role="Nurses" EntitySet="Nurses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DeptwiseD__Docto__4E88ABD4" Association="Self.FK__DeptwiseD__Docto__4E88ABD4">
+            <End Role="Doctors_" EntitySet="Doctors_" />
+            <End Role="DeptwiseDoctors" EntitySet="DeptwiseDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors__Doctors_" Association="Self.FK_Doctors__Doctors_">
+            <End Role="Doctors_" EntitySet="Doctors_" />
+            <End Role="Doctors_1" EntitySet="Doctors_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctors_Salary_Doctors_" Association="Self.FK_Doctors_Salary_Doctors_">
+            <End Role="Doctors_" EntitySet="Doctors_" />
+            <End Role="Doctors_Salary" EntitySet="Doctors_Salaries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Doctor_s_Table_Patinets" Association="Self.FK_Doctor_s_Table_Patinets">
+            <End Role="Patinets" EntitySet="Patinets" />
+            <End Role="Doctors_" EntitySet="Doctors_" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="hosmsModelStoreContainer" CdmEntityContainer="hosmsEntities">
+          <EntitySetMapping Name="AdminPanels">
+            <EntityTypeMapping TypeName="hosmsModel.AdminPanel">
+              <MappingFragment StoreEntitySet="AdminPanel">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments_">
+            <EntityTypeMapping TypeName="hosmsModel.Departments_">
+              <MappingFragment StoreEntitySet="Departments ">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DeptName" ColumnName="DeptName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeptwiseDoctors">
+            <EntityTypeMapping TypeName="hosmsModel.DeptwiseDoctor">
+              <MappingFragment StoreEntitySet="DeptwiseDoctors">
+                <ScalarProperty Name="DeptwiseId" ColumnName="DeptwiseId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="Institution" ColumnName="Institution" />
+                <ScalarProperty Name="VisitFee" ColumnName="VisitFee" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors_">
+            <EntityTypeMapping TypeName="hosmsModel.Doctors_">
+              <MappingFragment StoreEntitySet="Doctors ">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors_Salaries">
+            <EntityTypeMapping TypeName="hosmsModel.Doctors_Salary">
+              <MappingFragment StoreEntitySet="Doctors Salary">
+                <ScalarProperty Name="DocsId" ColumnName="DocsId" />
+                <ScalarProperty Name="VisitingDay" ColumnName="VisitingDay" />
+                <ScalarProperty Name="PayRate" ColumnName="PayRate" />
+                <ScalarProperty Name="TotalHour" ColumnName="TotalHour" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maintenence_Employees">
+            <EntityTypeMapping TypeName="hosmsModel.Maintenence_Employee">
+              <MappingFragment StoreEntitySet="Maintenence Employee">
+                <ScalarProperty Name="EmpId" ColumnName="EmpId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Work_section" ColumnName="Work section" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Nurses">
+            <EntityTypeMapping TypeName="hosmsModel.Nurse">
+              <MappingFragment StoreEntitySet="Nurses">
+                <ScalarProperty Name="NurseId" ColumnName="NurseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Patinets">
+            <EntityTypeMapping TypeName="hosmsModel.Patinet">
+              <MappingFragment StoreEntitySet="Patinets">
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="VisitDate" ColumnName="VisitDate" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="Isadmitted" ColumnName="Isadmitted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="hosmsModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="hosmsModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Confirm_pass" ColumnName="Confirm pass" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

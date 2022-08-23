@@ -1,0 +1,76 @@
+﻿@model IEnumerable<mvc_project.Models.Doctors_Salary>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12 m-2">
+        <div class="card border-info">
+            <div class="card-header">
+                <h2 class="card-title">Patient List</h2>
+                <h6 class="card-subtitle d-flex justify-content-between text-muted">Manage Doctors <a href="@Url.Action("Create","DoctorsSalary")" class="btn btn-primary" title="Create new employee"><i class="fa fa-plus">Add New</i></a></h6>
+            </div>
+            <div class="card-body">
+                @Html.Raw(TempData["delmsg"])
+                <table class="table table-bordered table-striped">
+                    <thead class="bg-warning">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Doctors_.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.VisitingDay)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PayRate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.TotalHour)
+                            </th>
+
+                            <th>Total Pay</th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                 
+
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctors_.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VisitingDay)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PayRate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalHour)
+                    </td>
+
+                    <td>@((item.PayRate*item.TotalHour).ToString("0.00"))</td>
+
+                    <td>
+                        <a href="@Url.Action("Edit","DoctorsSalary", new { id = item.DocsId })" class="btn btn-success"><span class="fa fa-edit">Edit</span></a>
+                        <a href="@Url.Action("Delete","DoctorsSalary", new { id = item.DocsId })" class="btn btn-danger"><span class="fa fa-trash">Delete</span></a>
+
+                    </td>
+                </tr>
+                    }
+
+                </table>
+
+            </div>
+
+            <div class="card-footer">
+                @Model.Count() Doctor's'
+            </div>
+        </div>
+    </div>
+</div>

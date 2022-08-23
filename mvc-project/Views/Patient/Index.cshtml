@@ -1,0 +1,90 @@
+﻿@*@model IEnumerable<mvc_project.Models.Patinet>*@
+@model PagedList.IPagedList<mvc_project.Models.Patinet>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-12 m-3">
+        <div class="card border-info">
+            <div class="card-header">
+                <h2 class="card-title">Patient List</h2>
+                <h6 class="card-subtitle d-flex justify-content-between text-muted">patient Info <a href="@Url.Action("Create","Patient")" class="btn btn-primary" title="Create new employee"><i class="fa fa-plus">Add New</i></a></h6>
+            </div>
+            <div class="card-body">
+                @Html.Raw(TempData["delmsg"])
+
+                @using (Html.BeginForm())
+                {
+                    <p>
+                        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "", placeholder = "patient name" })
+                        <input type="submit" value="Search" />
+                    </p>
+                }
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>
+                                @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm })
+                            </th>
+                            <th>
+                                Email
+                                @*@Html.DisplayNameFor(model => model.Email)*@
+                            </th>
+                            <th>
+                                visitDate
+                                @*@Html.DisplayNameFor(model => model.VisitDate)*@
+                            </th>
+                            <th>
+                                Fee
+                                @*@Html.DisplayNameFor(model => model.Fee)*@
+                            </th>
+                            <th>
+                                Isadmitted
+                                @*@Html.DisplayNameFor(model => model.Isadmitted)*@
+                            </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.VisitDate, "{0:dd-MM-yyyy}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Fee)
+                                </td>
+                                <td>
+                                    @Html.CheckBoxFor(modelItem => item.Isadmitted.Value)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit","Patient",new { id = item.PatientId })" class="btn btn-warning"><span class="fa fa-edit">Edit</span></a>
+                                    <a href="@Url.Action("Delete","Patient",new { id = item.PatientId })" class="btn btn-danger"><span class="fa fa-trash">Delete</span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="card-footer">
+                @Model.Count() Patients
+            </div>
+            <div class="d-flex justify-content-between bg-info">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </div>
+        </div>
+    </div>
+</div>

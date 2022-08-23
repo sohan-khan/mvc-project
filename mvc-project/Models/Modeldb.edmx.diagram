@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6213c7022c874d068f79f7a8905dbbf7" Name="Diagram1">
+        <EntityTypeShape EntityType="hosmsModel.AdminPanel" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.Departments_" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.DeptwiseDoctor" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.Doctors_" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.Doctors_Salary" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.Maintenence_Employee" Width="1.5" PointX="10" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.Nurse" Width="1.5" PointX="5.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.Patinet" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.Role" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="hosmsModel.UserInfo" Width="1.5" PointX="7.75" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="hosmsModel.FK_Maintenence_Employee_AdminPanel" ManuallyRouted="false" />
+        <AssociationConnector Association="hosmsModel.FK__DeptwiseD__Depar__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="hosmsModel.FK_Nurses_Departments_" ManuallyRouted="false" />
+        <AssociationConnector Association="hosmsModel.FK__DeptwiseD__Docto__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="hosmsModel.FK_Doctors__Doctors_" ManuallyRouted="false" />
+        <AssociationConnector Association="hosmsModel.FK_Doctors_Salary_Doctors_" ManuallyRouted="false" />
+        <AssociationConnector Association="hosmsModel.FK_Doctor_s_Table_Patinets" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

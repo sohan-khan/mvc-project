@@ -1,0 +1,92 @@
+﻿@model mvc_project.Models.UserInfo
+
+@{
+    ViewBag.Title = "Register";
+    
+}
+
+
+<div class="row m-2">
+   
+    <div class="col-md-12">
+        @using (Html.BeginForm("Register", "Home", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <h2 class="text-capitalize">Registration Form</h2>
+            <div class="form-horizontal">
+
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(x=>x.Name,new {@class="control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control col-md-6" })
+                        @Html.ValidationMessageFor(x => x.Name,"", new { @class = "text-danger col-md-6" })
+
+                    </div>
+                </div>
+                @*<div class="form-group">
+                    @Html.LabelFor(model => model.Name,  new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Name,  new { @class = "form-control col-6" } )
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger col-4" })
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Email, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control col-md-6" })
+                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger col-md-6" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Password, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.Password, new { @class = "form-control col-md-6", type="password" })
+                    @Html.ValidationMessageFor(x => x.Password, "", new { @class = "text-danger col-md-6" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Confirm_pass, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.Confirm_pass, new { @class = "form-control col-md-6", type = "password" })
+                    @Html.ValidationMessageFor(x => x.Confirm_pass, "", new { @class = "text-danger col-md-6" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(x => x.Phone, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control col-md-6" })
+                    @Html.ValidationMessageFor(x => x.Phone, "", new { @class = "text-danger col-md-6" })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(x => x.Role, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(x => x.Role, new { @class = "form-control col-md-6" })
+                    @Html.ValidationMessageFor(x => x.Role, "", new { @class = "text-danger col-md-6" })
+
+                </div>
+            </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>
+
+<div>
+    <a href="@Url.Action("login","Home")" class="btn btn-link">Go to login</a>
+</div>
